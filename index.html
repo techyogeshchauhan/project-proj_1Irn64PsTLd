@@ -1,0 +1,224 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Yogesh Chauhan - AI & Data Science Portfolio</title>
+    <meta name="description" content="Yogesh Chauhan's portfolio showcasing expertise in AI, Data Science, Computer Vision, and Backend Development.">
+    <meta name="keywords" content="AI, Data Science, Computer Vision, Backend Development, Python, Flask, MongoDB, OpenCV, Portfolio">
+    <meta name="theme-color" content="#4F46E5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yogeshchauhan.com/">
+    <meta property="og:title" content="Yogesh Chauhan - AI & Data Science Portfolio">
+    <meta property="og:description" content="Yogesh Chauhan's portfolio showcasing expertise in AI, Data Science, Computer Vision, and Backend Development.">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://yogeshchauhan.com/">
+    <meta name="twitter:title" content="Yogesh Chauhan - AI & Data Science Portfolio">
+    <meta name="twitter:description" content="Yogesh Chauhan's portfolio showcasing expertise in AI, Data Science, Computer Vision, and Backend Development.">
+
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+    <!-- EmailJS for contact form functionality -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function() {
+        // Initialize EmailJS with your public key
+        emailjs.init("EmyjwMPqNA3YaK6xO");
+      })();
+    </script>
+
+    <!-- Predefined Tailwind CSS, use it as needed, or update base on your -->
+    <style type="text/tailwindcss">
+        @layer theme {
+        :root {
+            /* Color Variables - Light Mode */
+            --primary-color: #ffffff;
+            --accent-color: #4F46E5;
+            --text-primary: #111827;
+            --text-secondary: #4B5563;
+            --background-dark: #F9FAFB;
+            --background-card: #ffffff;
+            --border-color: #E5E7EB;
+            
+            /* Transition for smooth theme switching */
+            --transition-speed: 0.3s;
+        }
+        
+        .dark {
+            --primary-color: #1F2937;
+            --accent-color: #6366F1;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --background-dark: #111827;
+            --background-card: #1F2937;
+            --border-color: #374151;
+        }
+        
+        .dark {
+            --primary-color: #1F2937;
+            --accent-color: #6366F1;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --background-dark: #111827;
+            --background-card: #1F2937;
+            --border-color: #374151;
+        }
+    }
+
+    @layer base {
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--background-dark) 100%);
+            min-height: 100vh;
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        ::selection {
+            background: var(--accent-color);
+            color: white;
+        }
+    }
+
+    @layer components {
+        .btn-primary {
+            @apply px-8 py-3 bg-[var(--accent-color)] text-white font-medium tracking-wide hover:bg-opacity-90 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg;
+        }
+        
+        .btn-secondary {
+            @apply px-8 py-3 border-2 border-[var(--accent-color)] text-[var(--accent-color)] font-medium tracking-wide hover:bg-[var(--accent-color)] hover:text-white transition-all duration-200 rounded-lg;
+        }
+        
+        .section-padding {
+            @apply py-24 px-6;
+        }
+        
+        .card {
+            @apply bg-[var(--background-card)] p-8 border border-[var(--border-color)] hover:border-[var(--accent-color)] transition-all duration-300 rounded-xl shadow-sm hover:shadow-md;
+            transition: background-color var(--transition-speed), border-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-color), var(--background-dark));
+        }
+        
+        .light-header {
+            @apply backdrop-blur-xl border-b border-[var(--border-color)];
+            background-color: rgba(var(--primary-color), 0.8);
+            transition: background-color 0.3s ease;
+        }
+        
+        .glass-card {
+            @apply backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-lg;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+          .section-padding {
+            padding: 4rem 1rem;
+          }
+          
+          h1 {
+            font-size: 2.5rem !important;
+          }
+          
+          h2 {
+            font-size: 2rem !important;
+          }
+          
+          .card {
+            padding: 1.25rem !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .section-padding {
+            padding: 3rem 1rem;
+          }
+          
+          h1 {
+            font-size: 2rem !important;
+          }
+          
+          h2 {
+            font-size: 1.75rem !important;
+          }
+          
+          .text-gradient {
+            background-size: 200% !important;
+          }
+        }
+    }
+
+    @layer utilities {
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-color), #818CF8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    }
+    </style>
+
+    <meta property="og:image" content="https://devproto.trickle.so/storage/app/WX20250722-161315.png">
+    <meta name="twitter:image" content="https://devproto.trickle.so/storage/app/WX20250722-161315.png">
+</head>
+
+<body class="scroll-smooth">
+    <div id="root"></div>
+
+    <script type="text/babel" src="components/Header.js"></script>
+    <script type="text/babel" src="components/Hero.js"></script>
+    <script type="text/babel" src="components/About.js"></script>
+    <script type="text/babel" src="components/Skills.js"></script>
+    <script type="text/babel" src="components/Internship.js"></script>
+    <script type="text/babel" src="components/Projects.js"></script>
+    <script type="text/babel" src="components/Contact.js"></script>
+    <script type="text/babel" src="components/Footer.js"></script>
+    <script type="text/babel" src="app.js"></script>
+
+
+
+</body>
+
+</html>
