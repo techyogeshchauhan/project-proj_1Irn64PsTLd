@@ -36,6 +36,29 @@ class ErrorBoundary extends React.Component {
 
 function App() {
   try {
+    // Initialize theme based on user preference
+    React.useEffect(() => {
+      // Check if user has a saved preference
+      const savedMode = localStorage.getItem('darkMode');
+      if (savedMode) {
+        if (savedMode === 'true') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } else {
+        // Check system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (prefersDark) {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('darkMode', 'true');
+        } else {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('darkMode', 'false');
+        }
+      }
+    }, []);
+    
     return (
       <div className="min-h-screen bg-[var(--background-dark)]" data-name="portfolio-app" data-file="app.js">
         <Header />
