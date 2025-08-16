@@ -118,7 +118,7 @@ function Projects() {
       {
         title: "AI-powered Domain-Specific Chatbot",
         description: "A chatbot trained on domain-specific datasets to provide accurate, context-aware answers. Built using NLP models and integrated with a web interface for seamless user interaction.",
-        image: "/trickle/assets/AI-powered-Chatbot.png",
+        image: "/trickle/assets/new.png",
         tags: ["Python", "Flask", "NLP", "OpenAI", "MongoDB"],
         liveUrl: "#",
         githubUrl: "https://github.com/techyogeshchauhan/AI-powered-Domain-Specific-Chatbot"  
