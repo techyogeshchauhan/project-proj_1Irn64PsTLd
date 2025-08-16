@@ -79,7 +79,7 @@ function Hero() {
     return (
       <section
         id="home"
-        className="min-h-screen flex items-center relative overflow-hidden bg-gradient-to-b from-[var(--primary-color)] to-[var(--background-dark)] text-[var(--text-primary)] section-padding px-4 sm:px-6 py-16 sm:py-20"
+        className="min-h-screen flex items-center relative overflow-hidden bg-gradient-to-b from-[var(--primary-color)] to-[var(--background-dark)] text-[var(--text-primary)] section-padding px-4 sm:px-6 py-16 sm:py-20 pt-24 sm:pt-28"
         data-name="hero"
         data-file="components/Hero.js"
       >
@@ -172,8 +172,8 @@ function Hero() {
 
             {/* Right Side - Profile Image with Data Visualization Elements */}
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end" data-aos="fade-left" data-aos-delay="200">
-              <div className="relative animate-scale">
-                <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border-2 border-[var(--accent-secondary)] bg-[var(--background-card)] shadow-2xl">
+              <div className="relative animate-scale mt-10 sm:mt-0">
+                <div className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border-2 border-[var(--accent-secondary)] bg-[var(--background-card)] shadow-2xl">
                   <img
                     src="/trickle/assets/1737493431658.jpg"
                     alt="Yogesh Chauhan - Data Scientist"
@@ -182,23 +182,23 @@ function Hero() {
                 </div>
                 
                 {/* Data Science themed decorative elements */}
-                <div className="absolute -bottom-4 -right-4 bg-[var(--background-card)] p-4 rounded-full border-2 border-[var(--accent-secondary)] shadow-lg pulse-animation">
-                  <div className="text-3xl text-[var(--accent-secondary)]">
+                <div className="absolute -bottom-3 sm:-bottom-4 -right-3 sm:-right-4 bg-[var(--background-card)] p-3 sm:p-4 rounded-full border-2 border-[var(--accent-secondary)] shadow-lg pulse-animation">
+                  <div className="text-2xl sm:text-3xl text-[var(--accent-secondary)]">
                     <div className="icon-chart-pie"></div>
                   </div>
                 </div>
-                <div className="absolute -top-4 -left-4 bg-[var(--background-card)] p-3 rounded-full border-2 border-[var(--accent-tertiary)] shadow-lg">
-                  <div className="text-2xl text-[var(--accent-tertiary)]">
+                <div className="absolute -top-3 sm:-top-4 -left-3 sm:-left-4 bg-[var(--background-card)] p-2 sm:p-3 rounded-full border-2 border-[var(--accent-tertiary)] shadow-lg">
+                  <div className="text-xl sm:text-2xl text-[var(--accent-tertiary)]">
                     <div className="icon-brain"></div>
                   </div>
                 </div>
-                <div className="absolute top-1/2 -right-6 transform -translate-y-1/2 bg-[var(--background-card)] p-3 rounded-full border-2 border-[var(--accent-color)] shadow-lg">
-                  <div className="text-2xl text-[var(--accent-color)]">
+                <div className="absolute top-1/2 -right-4 sm:-right-6 transform -translate-y-1/2 bg-[var(--background-card)] p-2 sm:p-3 rounded-full border-2 border-[var(--accent-color)] shadow-lg">
+                  <div className="text-xl sm:text-2xl text-[var(--accent-color)]">
                     <div className="icon-database"></div>
                   </div>
                 </div>
-                <div className="absolute top-1/4 -left-6 bg-[var(--background-card)] p-3 rounded-full border-2 border-[var(--accent-color)] shadow-lg">
-                  <div className="text-2xl text-[var(--accent-color)]">
+                <div className="absolute top-1/4 -left-4 sm:-left-6 bg-[var(--background-card)] p-2 sm:p-3 rounded-full border-2 border-[var(--accent-color)] shadow-lg">
+                  <div className="text-xl sm:text-2xl text-[var(--accent-color)]">
                     <div className="icon-code"></div>
                   </div>
                 </div>
