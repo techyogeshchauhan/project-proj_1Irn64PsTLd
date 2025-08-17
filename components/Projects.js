@@ -32,17 +32,31 @@ function Projects() {
         // Prepare data for chart
         const labels = Object.keys(categoryCount);
         const data = Object.values(categoryCount);
-        const backgroundColors = [
-          'var(--chart-color-1)',
-          'var(--chart-color-2)',
-          'var(--chart-color-3)',
-          'var(--chart-color-4)',
-          'var(--chart-color-5)',
-          'var(--accent-color)',
-          'var(--accent-secondary)',
-          'var(--accent-tertiary)'
-        ];
         
+        // Create gradient function
+        const createGradient = (ctx, color1, color2) => {
+          const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+          gradient.addColorStop(0, color1);
+          gradient.addColorStop(1, color2);
+          return gradient;
+        };
+
+        // Prepare colorful gradients
+        const backgroundColors = labels.map((_, i) => {
+          const colors = [
+            ['#6366F1', '#8B5CF6'], // Indigo to Violet
+            ['#10B981', '#14B8A6'], // Emerald to Teal
+            ['#F59E0B', '#F97316'], // Amber to Orange
+            ['#EF4444', '#EC4899'], // Red to Pink
+            ['#3B82F6', '#06B6D4'], // Blue to Cyan
+            ['#84CC16', '#22C55E'], // Lime to Green
+            ['#8B5CF6', '#EC4899'], // Violet to Pink
+            ['#F97316', '#F59E0B'], // Orange to Amber
+          ];
+          const [color1, color2] = colors[i % colors.length];
+          return createGradient(ctx, color1, color2);
+        });
+
         // Create chart
         window.projectDistributionChart = new Chart(ctx, {
           type: 'bar',
@@ -51,9 +65,11 @@ function Projects() {
             datasets: [{
               label: 'Projects by Technology',
               data: data,
-              backgroundColor: backgroundColors.slice(0, labels.length),
-              borderColor: 'rgba(0, 0, 0, 0.1)',
-              borderWidth: 1
+              backgroundColor: backgroundColors,
+              borderColor: 'rgba(255, 255, 255, 0.3)',
+              borderWidth: 1,
+              borderRadius: 8,
+              borderSkipped: false,
             }]
           },
           options: {
@@ -64,6 +80,11 @@ function Projects() {
                 display: false
               },
               tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                padding: 12,
+                cornerRadius: 8,
                 callbacks: {
                   label: function(context) {
                     return `${context.parsed.y} projects`;
@@ -75,9 +96,31 @@ function Projects() {
               y: {
                 beginAtZero: true,
                 ticks: {
-                  precision: 0
+                  precision: 0,
+                  color: 'var(--text-secondary)',
+                  font: {
+                    weight: 'bold'
+                  }
+                },
+                grid: {
+                  color: 'rgba(255, 255, 255, 0.1)'
+                }
+              },
+              x: {
+                ticks: {
+                  color: 'var(--text-secondary)',
+                  font: {
+                    weight: 'bold'
+                  }
+                },
+                grid: {
+                  display: false
                 }
               }
+            },
+            animation: {
+              duration: 1000,
+              easing: 'easeOutQuart'
             }
           }
         });
@@ -231,21 +274,21 @@ function Projects() {
           <div className="glass-card p-6 mb-8 sm:mb-12 rounded-lg bg-[var(--background-card)] shadow-md">
             <h3 className="text-xl font-bold mb-4 text-[var(--text-primary)]">Project Analytics</h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div className="p-4 bg-[var(--background-dark)] rounded-lg">
-                <div className="text-3xl font-bold mb-1 text-[var(--accent-color)]">{totalProjects}</div>
-                <div className="text-sm text-[var(--text-secondary)]">Total Projects</div>
+              <div className="p-4 bg-gradient-to-br from-[#6366F1] to-[#8B5CF6] rounded-lg text-white">
+                <div className="text-3xl font-bold mb-1">{totalProjects}</div>
+                <div className="text-sm opacity-90">Total Projects</div>
               </div>
-              <div className="p-4 bg-[var(--background-dark)] rounded-lg">
-                <div className="text-3xl font-bold mb-1 text-[var(--accent-color)]">{dataScience}</div>
-                <div className="text-sm text-[var(--text-secondary)]">Python & Data Science</div>
+              <div className="p-4 bg-gradient-to-br from-[#10B981] to-[#14B8A6] rounded-lg text-white">
+                <div className="text-3xl font-bold mb-1">{dataScience}</div>
+                <div className="text-sm opacity-90">Python & Data Science</div>
               </div>
-              <div className="p-4 bg-[var(--background-dark)] rounded-lg">
-                <div className="text-3xl font-bold mb-1 text-[var(--accent-color)]">{computerVision}</div>
-                <div className="text-sm text-[var(--text-secondary)]">Computer Vision</div>
+              <div className="p-4 bg-gradient-to-br from-[#F59E0B] to-[#F97316] rounded-lg text-white">
+                <div className="text-3xl font-bold mb-1">{computerVision}</div>
+                <div className="text-sm opacity-90">Computer Vision</div>
               </div>
-              <div className="p-4 bg-[var(--background-dark)] rounded-lg">
-                <div className="text-3xl font-bold mb-1 text-[var(--accent-color)]">{machineLearningStat + deepLearningStat}</div>
-                <div className="text-sm text-[var(--text-secondary)]">ML & Deep Learning</div>
+              <div className="p-4 bg-gradient-to-br from-[#EC4899] to-[#EF4444] rounded-lg text-white">
+                <div className="text-3xl font-bold mb-1">{machineLearningStat + deepLearningStat}</div>
+                <div className="text-sm opacity-90">ML & Deep Learning</div>
               </div>
             </div>
           </div>
@@ -266,14 +309,14 @@ function Projects() {
             <div className="flex space-x-2">
               <button 
                 onClick={() => setViewMode('grid')} 
-                className={`px-3 py-1 rounded-lg flex items-center ${viewMode === 'grid' ? 'bg-[var(--accent-color)] text-white' : 'bg-[var(--background-card)] text-[var(--text-secondary)] border border-[var(--border-color)]'}`}
+                className={`px-3 py-1 rounded-lg flex items-center ${viewMode === 'grid' ? 'bg-gradient-to-r from-[var(--accent-color)] to-[#8B5CF6] text-white shadow-md' : 'bg-[var(--background-card)] text-[var(--text-secondary)] border border-[var(--border-color)]'}`}
               >
                 <div className="icon-grid mr-1"></div>
                 Grid
               </button>
               <button 
                 onClick={() => setViewMode('chart')} 
-                className={`px-3 py-1 rounded-lg flex items-center ${viewMode === 'chart' ? 'bg-[var(--accent-color)] text-white' : 'bg-[var(--background-card)] text-[var(--text-secondary)] border border-[var(--border-color)]'}`}
+                className={`px-3 py-1 rounded-lg flex items-center ${viewMode === 'chart' ? 'bg-gradient-to-r from-[var(--accent-color)] to-[#EC4899] text-white shadow-md' : 'bg-[var(--background-card)] text-[var(--text-secondary)] border border-[var(--border-color)]'}`}
               >
                 <div className="icon-chart-bar mr-1"></div>
                 Analytics
@@ -283,17 +326,29 @@ function Projects() {
           
           {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">
-            {categories.map((category, index) => (
-              <button
-                key={index}
-                onClick={() => setFilter(category)}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-sm sm:text-base transition-all ${filter === category 
-                  ? 'bg-[var(--accent-color)] text-white shadow-md' 
-                  : 'bg-[var(--background-card)] text-[var(--text-secondary)] hover:text-[var(--accent-color)] border border-[var(--border-color)]'}`}
-              >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </button>
-            ))}
+            {categories.map((category, index) => {
+              const colorClasses = [
+                'from-[#6366F1] to-[#8B5CF6]', // Indigo to Violet
+                'from-[#10B981] to-[#14B8A6]', // Emerald to Teal
+                'from-[#F59E0B] to-[#F97316]', // Amber to Orange
+                'from-[#EF4444] to-[#EC4899]', // Red to Pink
+                'from-[#3B82F6] to-[#06B6D4]', // Blue to Cyan
+                'from-[#84CC16] to-[#22C55E]', // Lime to Green
+              ];
+              const bgClass = colorClasses[index % colorClasses.length];
+              
+              return (
+                <button
+                  key={index}
+                  onClick={() => setFilter(category)}
+                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-sm sm:text-base transition-all ${filter === category 
+                    ? `bg-gradient-to-r ${bgClass} text-white shadow-md` 
+                    : 'bg-[var(--background-card)] text-[var(--text-secondary)] hover:text-[var(--accent-color)] border border-[var(--border-color)]'}`}
+                >
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                </button>
+              );
+            })}
           </div>
 
           {viewMode === 'grid' ? (
@@ -336,18 +391,30 @@ function Projects() {
                     <p className="text-sm sm:text-base text-[var(--text-secondary)] mb-3 sm:mb-4 leading-relaxed">{project.description}</p>
                     
                     <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                      {project.tags.map((tag, tagIndex) => (
-                        <span 
-                          key={tagIndex}
-                          className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[var(--background-dark)] text-[var(--text-secondary)] text-xs sm:text-sm hover:bg-[var(--accent-color)] hover:text-white transition-all duration-200"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setFilter(tag.split(' ')[0].toLowerCase());
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                      {project.tags.map((tag, tagIndex) => {
+                        const colorClasses = [
+                          'bg-[#6366F1]/10 text-[#6366F1] hover:bg-[#6366F1] hover:text-white',
+                          'bg-[#10B981]/10 text-[#10B981] hover:bg-[#10B981] hover:text-white',
+                          'bg-[#F59E0B]/10 text-[#F59E0B] hover:bg-[#F59E0B] hover:text-white',
+                          'bg-[#EF4444]/10 text-[#EF4444] hover:bg-[#EF4444] hover:text-white',
+                          'bg-[#3B82F6]/10 text-[#3B82F6] hover:bg-[#3B82F6] hover:text-white',
+                          'bg-[#8B5CF6]/10 text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white',
+                        ];
+                        const colorClass = colorClasses[tagIndex % colorClasses.length];
+                        
+                        return (
+                          <span 
+                            key={tagIndex}
+                            className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm transition-all duration-200 ${colorClass}`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setFilter(tag.split(' ')[0].toLowerCase());
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
                 ))
@@ -358,7 +425,7 @@ function Projects() {
                   <p className="text-sm sm:text-base text-[var(--text-secondary)]">No projects match the selected filter. Try another category.</p>
                   <button 
                     onClick={() => setFilter('all')} 
-                    className="mt-3 sm:mt-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-[var(--accent-color)] text-white text-sm sm:text-base rounded-lg hover:bg-opacity-90 transition-all"
+                    className="mt-3 sm:mt-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-[var(--accent-color)] to-[#8B5CF6] text-white text-sm sm:text-base rounded-lg hover:opacity-90 transition-all shadow-md"
                   >
                     Show all projects
                   </button>
@@ -366,12 +433,16 @@ function Projects() {
               )}
             </div>
           ) : (
-            <div className="bg-[var(--background-card)] p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-4 text-[var(--text-primary)]">Project Distribution by Technology</h3>
-              <div className="h-80 w-full">
+            <div className="bg-[var(--background-card)] p-6 rounded-lg shadow-md relative overflow-hidden">
+              <div className="absolute inset-0 opacity-5 pointer-events-none">
+                <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-[#6366F1] blur-3xl"></div>
+                <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-[#EC4899] blur-3xl"></div>
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-[var(--text-primary)] relative z-10">Project Distribution by Technology</h3>
+              <div className="h-80 w-full relative z-10">
                 <canvas ref={projectChartRef}></canvas>
               </div>
-              <div className="mt-6 text-center text-sm text-[var(--text-secondary)]">
+              <div className="mt-6 text-center text-sm text-[var(--text-secondary)] relative z-10">
                 This chart visualizes project distribution across different technologies and domains.
               </div>
             </div>
@@ -385,7 +456,7 @@ function Projects() {
               href="https://github.com/techyogeshchauhan" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="btn-secondary inline-flex items-center space-x-3 sm:space-x-4 hover:scale-105 transition-transform duration-300 text-sm sm:text-base"
+              className="btn-secondary inline-flex items-center space-x-3 sm:space-x-4 hover:scale-105 transition-transform duration-300 text-sm sm:text-base bg-gradient-to-r from-[var(--accent-color)] to-[#8B5CF6] text-white py-2 px-6 rounded-lg shadow-md hover:opacity-90"
             >
               <div className="icon-github text-xl sm:text-2xl"></div>
               <span>View All on GitHub</span>
