@@ -175,7 +175,7 @@ function Hero() {
               <div className="relative animate-scale mt-10 sm:mt-0">
                 <div className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border-2 border-[var(--accent-secondary)] bg-[var(--background-card)] shadow-2xl">
                   <img
-                    src="/trickle/assets/1737493431658.jpg"
+                    src="/trickle/assets/yogu2.jpg"
                     alt="Yogesh Chauhan - Data Scientist"
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   />
